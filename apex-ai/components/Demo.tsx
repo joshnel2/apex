@@ -14,6 +14,7 @@ export const Demo: React.FC = () => {
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -28,17 +29,20 @@ export const Demo: React.FC = () => {
   };
 
   useEffect(() => {
-    // Only auto-scroll if user hasn't manually scrolled up
-    // Use a small delay to ensure the DOM is ready
-    const timer = setTimeout(() => {
-      scrollToBottom();
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [messages]);
+    // Only auto-scroll after user has interacted (sent a message)
+    // This prevents the page from auto-scrolling on initial load
+    if (hasUserInteracted && messages.length > 1) {
+      const timer = setTimeout(() => {
+        scrollToBottom();
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [messages, hasUserInteracted]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
+    setHasUserInteracted(true);
     const userMessage: ChatMessage = {
       role: 'user',
       content: input,
