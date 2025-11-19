@@ -3,14 +3,9 @@
   "outputDirectory": "apex-ai/dist",
   "installCommand": "cd apex-ai && npm install",
   "framework": "vite",
-  "functions": {
-    "api/chat.ts": {
-      "runtime": "@vercel/node"
-    }
-  },
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ],
