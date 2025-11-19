@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Loader2, Terminal, Activity } from 'lucide-react';
-import { generateLegalDemoResponse } from '../services/geminiService';
+import { generateLegalDemoResponse } from '../services/azureService';
 import { ChatMessage } from '../types';
 import { Button } from './Button';
 
