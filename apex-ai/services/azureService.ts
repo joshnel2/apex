@@ -16,7 +16,18 @@ export const generateLegalDemoResponse = async (prompt: string): Promise<string>
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error('Chat API error:', response.status, errorData);
-      return "An error occurred while processing your request. Please try again.";
+      
+      // Provide more helpful error messages
+      if (response.status === 500 && errorData.error) {
+        if (errorData.error.includes('not configured')) {
+          return "Error: Azure OpenAI credentials are not configured. Please check your environment variables.";
+        }
+        if (errorData.details) {
+          return `Error: ${errorData.error}. ${errorData.details}`;
+        }
+      }
+      
+      return `An error occurred (${response.status}). Please check the browser console for details.`;
     }
 
     const data = await response.json();
