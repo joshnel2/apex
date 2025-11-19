@@ -40,11 +40,14 @@ const buildChatUrl = (endpoint: string, deployment: string, apiVersion: string, 
 
   const normalizedEndpoint = endpoint.endsWith('/') ? endpoint.slice(0, -1) : endpoint;
   const hasDeploymentPath = /\/openai\/deployments\//i.test(normalizedEndpoint);
-  const baseUrl = hasDeploymentPath
+  const basePath = hasDeploymentPath
     ? normalizedEndpoint
-    : `${normalizedEndpoint}/openai/deployments/${deployment}/chat/completions`;
+    : `${normalizedEndpoint}/openai/deployments/${deployment}`;
 
-  return appendApiVersion(baseUrl, apiVersion);
+  const hasChatPath = /\/chat\/completions$/i.test(basePath);
+  const chatPath = hasChatPath ? basePath : `${basePath}/chat/completions`;
+
+  return appendApiVersion(chatPath, apiVersion);
 };
 
 const parseBody = async (req: VercelRequest) => {
