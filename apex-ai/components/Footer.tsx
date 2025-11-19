@@ -8,11 +8,11 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 text-white mb-4 md:mb-0">
             <Scale className="text-slate-600" size={24} />
-            <span className="text-lg font-serif font-bold tracking-wide text-slate-600">APEX AI</span>
+            <span className="text-lg font-serif font-bold tracking-wide text-slate-600">STRAPPED AI</span>
           </div>
           
           <div className="text-slate-500 text-sm text-center md:text-right">
-            <p className="mb-2">&copy; {new Date().getFullYear()} Apex AI Solutions. All rights reserved.</p>
+            <p className="mb-2">&copy; {new Date().getFullYear()} Strapped AI Solutions. All rights reserved.</p>
             <p>Strictly Confidential. For Authorized Use Only.</p>
           </div>
         </div>

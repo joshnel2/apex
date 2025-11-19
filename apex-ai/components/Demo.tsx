@@ -9,7 +9,7 @@ export const Demo: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { 
       role: 'model', 
-      content: 'Welcome to the Apex AI Architecture Demo. I am a secure agent prototype. You can ask me to summarize a legal concept or draft a standard clause to see how our fine-tuned models perform. \n\n*Note: In a live deployment, I would have secure access to your firm\'s Document Management System.*',
+      content: 'Welcome to the Strapped AI Architecture Demo. I am a secure agent prototype. You can ask me to summarize a legal concept or draft a standard clause to see how our fine-tuned models perform. \n\n*Note: In a live deployment, I would have secure access to your firm\'s Document Management System.*',
       timestamp: Date.now() 
     }
   ]);
@@ -117,7 +117,7 @@ export const Demo: React.FC = () => {
               <div className="bg-slate-800 p-4 border-b border-slate-700 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-sm font-medium text-white">Apex AI Agent v2.1 (Demo Mode)</span>
+                  <span className="text-sm font-medium text-white">Strapped AI Agent v2.1 (Demo Mode)</span>
                 </div>
                 <span className="text-xs text-slate-500">Secure Connection</span>
               </div>

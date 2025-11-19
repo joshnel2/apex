@@ -18,7 +18,7 @@ export const Navbar: React.FC<{ onConsultClick: () => void }> = ({ onConsultClic
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <div className="flex items-center gap-2 text-white cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <Scale className="text-gold-500" size={28} />
-          <span className="text-xl font-serif font-bold tracking-wide">APEX <span className="text-gold-500">AI</span></span>
+          <span className="text-xl font-serif font-bold tracking-wide">STRAPPED <span className="text-gold-500">AI</span></span>
         </div>
         
         <div className="hidden md:flex items-center gap-8">
