@@ -9,6 +9,38 @@ Keep responses professional, concise, and formatted for easy reading (markdown).
 Use a tone that is authoritative yet deferential to the attorney user.
 `;
 
+const getEnv = (...keys: (keyof NodeJS.ProcessEnv)[]) => {
+  for (const key of keys) {
+    const value = process.env[key];
+    if (value) return value;
+  }
+  return undefined;
+};
+
+const appendApiVersion = (url: string, apiVersion: string) => {
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}api-version=${apiVersion}`;
+};
+
+const buildAzureChatUrl = (options: { endpoint?: string; deployment: string; apiVersion: string; directUrl?: string }) => {
+  if (options.directUrl) {
+    return appendApiVersion(options.directUrl.replace(/\s/g, ''), options.apiVersion);
+  }
+
+  const endpoint = options.endpoint?.trim();
+  if (!endpoint) {
+    return undefined;
+  }
+
+  const normalizedEndpoint = endpoint.endsWith('/') ? endpoint.slice(0, -1) : endpoint;
+  const hasDeploymentPath = /\/openai\/deployments\//i.test(normalizedEndpoint);
+  const baseUrl = hasDeploymentPath
+    ? normalizedEndpoint
+    : `${normalizedEndpoint}/openai/deployments/${options.deployment}/chat/completions`;
+
+  return appendApiVersion(baseUrl, options.apiVersion);
+};
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -21,27 +53,58 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    const apiKey = process.env.AZURE_OPENAI_API_KEY;
-    const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
-    const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o-mini';
+    const apiKey = getEnv(
+      'AZURE_OPENAI_API_KEY',
+      'AZURE_OPENAI_KEY',
+      'AZURE_AI_FOUNDRY_API_KEY',
+      'AZURE_AI_FOUNDRY_KEY',
+      'AZURE_AI_API_KEY'
+    );
+    const endpoint = getEnv(
+      'AZURE_OPENAI_ENDPOINT',
+      'AZURE_AI_FOUNDRY_ENDPOINT',
+      'AZURE_AI_ENDPOINT'
+    );
+    const deploymentName =
+      getEnv(
+        'AZURE_OPENAI_DEPLOYMENT_NAME',
+        'AZURE_OPENAI_CHAT_DEPLOYMENT',
+        'AZURE_AI_FOUNDRY_DEPLOYMENT_NAME',
+        'AZURE_AI_DEPLOYMENT_NAME'
+      ) || 'gpt-4o-mini';
 
-    if (!apiKey || !endpoint) {
-      console.error('Azure OpenAI credentials not configured', {
+    const apiVersion =
+      getEnv(
+        'AZURE_OPENAI_API_VERSION',
+        'AZURE_AI_FOUNDRY_API_VERSION'
+      ) || '2024-08-01-preview';
+
+    const directChatUrl = getEnv(
+      'AZURE_OPENAI_CHAT_COMPLETIONS_URL',
+      'AZURE_AI_FOUNDRY_CHAT_URL',
+      'AZURE_AI_CHAT_COMPLETIONS_URL'
+    );
+
+    const apiUrl = buildAzureChatUrl({
+      endpoint,
+      deployment: deploymentName,
+      apiVersion,
+      directUrl: directChatUrl
+    });
+
+    if (!apiKey || !apiUrl) {
+      console.error('Azure AI configuration issue', {
         hasApiKey: !!apiKey,
         hasEndpoint: !!endpoint,
-        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing'
+        hasDirectUrl: !!directChatUrl,
+        deploymentName,
+        apiVersion
       });
-      return res.status(500).json({ 
-        error: 'Azure OpenAI credentials not configured',
-        debug: {
-          hasApiKey: !!apiKey,
-          hasEndpoint: !!endpoint
-        }
+      return res.status(500).json({
+        error: 'Azure AI credentials not configured',
+        details: 'Please confirm API key, endpoint (or direct chat URL), and deployment name environment variables.'
       });
     }
-
-    // Construct the full API URL
-    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-02-15-preview`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',

@@ -8,7 +8,7 @@ This contains everything you need to run your app locally and deploy it to Verce
 
 ## Environment Variables
 
-You need the following environment variables for Azure OpenAI:
+You need the following environment variables for Azure OpenAI / Azure AI Foundry:
 
 ### Required:
 - **`AZURE_OPENAI_API_KEY`** - Your Azure OpenAI API key
@@ -18,10 +18,15 @@ You need the following environment variables for Azure OpenAI:
   - Format: `https://your-resource-name.openai.azure.com`
   - Get this from: Azure Portal > Your Resource > Keys and Endpoint
 
-### Optional:
+### Optional (recommended when using Azure AI Foundry project endpoints):
 - **`AZURE_OPENAI_DEPLOYMENT_NAME`** - Your deployment name (defaults to `gpt-4`)
   - This is the name you gave your model deployment in Azure
   - Common values: `gpt-4`, `gpt-35-turbo`, `gpt-4-turbo`
+- **`AZURE_OPENAI_API_VERSION`** - Override the API version if your resource requires a newer preview version (defaults to `2024-08-01-preview`)
+- **`AZURE_OPENAI_CHAT_COMPLETIONS_URL`** - (Optional) Supply the *full* chat completions URL if you copied it from Azure AI Foundry and it already includes the deployment path. When set, this takes precedence over the endpoint/deployment combo.
+
+> **Azure AI Foundry naming:** If your environment already uses the `AZURE_AI_FOUNDRY_*` variables, you don’t need to rename them.  
+> The serverless function now automatically falls back to `AZURE_AI_FOUNDRY_API_KEY`, `AZURE_AI_FOUNDRY_ENDPOINT`, `AZURE_AI_FOUNDRY_DEPLOYMENT_NAME`, and `AZURE_AI_FOUNDRY_API_VERSION`.
 
 ## Run Locally
 
