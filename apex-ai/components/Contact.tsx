@@ -5,6 +5,8 @@ import { CheckCircle } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<ContactFormData>({
     firmName: '',
     contactName: '',
@@ -18,12 +20,33 @@ export const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API submission
-    setTimeout(() => {
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
       setIsSubmitted(true);
-    }, 1000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred. Please try again.');
+      console.error('Form submission error:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -148,8 +171,14 @@ export const Contact: React.FC = () => {
                 ></textarea>
               </div>
 
-              <Button type="submit" className="w-full mt-2">
-                Submit Request
+              {error && (
+                <div className="bg-red-900/20 border border-red-500/50 text-red-300 px-4 py-3 rounded text-sm">
+                  {error}
+                </div>
+              )}
+
+              <Button type="submit" className="w-full mt-2" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting...' : 'Submit Request'}
               </Button>
             </form>
           </div>
