@@ -8,20 +8,19 @@ This contains everything you need to run your app locally and deploy it to Verce
 
 ## Environment Variables
 
-You need the following environment variables for Azure OpenAI:
+You only need **three** environment variables for Azure OpenAI / Azure AI Foundry:
 
-### Required:
-- **`AZURE_OPENAI_API_KEY`** - Your Azure OpenAI API key
-  - Get this from: Azure Portal > Your Resource > Keys and Endpoint > Key 1 or Key 2
-  
-- **`AZURE_OPENAI_ENDPOINT`** - Your Azure OpenAI endpoint URL
-  - Format: `https://your-resource-name.openai.azure.com`
-  - Get this from: Azure Portal > Your Resource > Keys and Endpoint
+- **`AZURE_OPENAI_API_KEY`** – Your API key (Azure Portal → Keys & Endpoint → Key 1 or Key 2)
+- **`AZURE_OPENAI_ENDPOINT`** – Endpoint URL, e.g. `https://your-resource-name.openai.azure.com`
+- **`AZURE_OPENAI_DEPLOYMENT_NAME`** – The deployment name you assigned to the model (e.g. `gpt-4o-mini`)
 
-### Optional:
-- **`AZURE_OPENAI_DEPLOYMENT_NAME`** - Your deployment name (defaults to `gpt-4`)
-  - This is the name you gave your model deployment in Azure
-  - Common values: `gpt-4`, `gpt-35-turbo`, `gpt-4-turbo`
+> That’s it. With those three values in place, the chat API will connect to Azure AI Foundry.
+
+**Advanced (optional)**
+
+- `AZURE_OPENAI_API_VERSION` – override the default `2024-08-01-preview` if your resource mandates another version
+- `AZURE_OPENAI_CHAT_COMPLETIONS_URL` – supply the fully qualified chat completions URL if you prefer copying the exact Foundry endpoint
+- `AZURE_AI_FOUNDRY_*` variants – if your existing environment already uses names like `AZURE_AI_FOUNDRY_API_KEY`, the API will automatically pick them up, so you don’t need duplicates
 
 ## Run Locally
 
