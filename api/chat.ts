@@ -1,5 +1,3 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 const SYSTEM_INSTRUCTION = `
 You are Strapped AI, a sophisticated legal AI assistant demo designed for a law firm consultation website.
 Your purpose is to demonstrate the capability of AI to summarize complex text and draft simple clauses.
@@ -9,17 +7,42 @@ Keep responses professional, concise, and formatted for easy reading (markdown).
 Use a tone that is authoritative yet deferential to the attorney user.
 `;
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { prompt } = req.body;
+      const parseRequestBody = () => {
+        if (!req.body) return null;
 
-    if (!prompt || typeof prompt !== 'string') {
-      return res.status(400).json({ error: 'Prompt is required' });
-    }
+        if (typeof req.body === 'string') {
+          try {
+            return JSON.parse(req.body);
+          } catch (error) {
+            console.error('Invalid JSON body received', error);
+            return null;
+          }
+        }
+
+        if (Buffer.isBuffer(req.body)) {
+          try {
+            return JSON.parse(req.body.toString('utf8'));
+          } catch (error) {
+            console.error('Invalid buffer body received', error);
+            return null;
+          }
+        }
+
+        return req.body;
+      };
+
+      const body = parseRequestBody();
+      const prompt = typeof body?.prompt === 'string' ? body.prompt.trim() : '';
+
+      if (!prompt) {
+        return res.status(400).json({ error: 'Prompt is required' });
+      }
 
     const apiKey = process.env.AZURE_OPENAI_API_KEY;
     const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
