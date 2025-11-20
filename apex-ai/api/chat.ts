@@ -16,8 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const { prompt } = req.body;
-
-    if (!prompt || typeof prompt !== 'string') {
+    if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
@@ -26,22 +25,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o-mini';
 
     if (!apiKey || !endpoint) {
-      console.error('Azure OpenAI credentials not configured', {
-        hasApiKey: !!apiKey,
-        hasEndpoint: !!endpoint,
-        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing'
-      });
-      return res.status(500).json({ 
-        error: 'Azure OpenAI credentials not configured',
-        debug: {
-          hasApiKey: !!apiKey,
-          hasEndpoint: !!endpoint
-        }
-      });
+      return res.status(500).json({ error: 'Azure OpenAI not configured' });
     }
 
-    // Construct the full API URL
-    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-02-15-preview`;
+    const apiUrl = `${endpoint.replace(/\/$/, '')}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-02-15-preview`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -51,14 +38,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
       body: JSON.stringify({
         messages: [
-          {
-            role: 'system',
-            content: SYSTEM_INSTRUCTION,
-          },
-          {
-            role: 'user',
-            content: prompt,
-          },
+          { role: 'system', content: SYSTEM_INSTRUCTION },
+          { role: 'user', content: prompt },
         ],
         temperature: 0.3,
         max_tokens: 2000,
@@ -67,21 +48,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Azure OpenAI API error:', response.status, errorText);
-      return res.status(response.status).json({ 
-        error: `Azure OpenAI API error: ${response.status}`,
-        details: errorText 
-      });
+      return res.status(500).json({ error: 'Azure API error', details: errorText });
     }
 
     const data = await response.json();
-    const content = data.choices[0]?.message?.content || "I apologize, but I could not generate a response at this time.";
+    const content = data.choices?.[0]?.message?.content || "Could not generate response.";
     
     return res.status(200).json({ content });
   } catch (error) {
-    console.error("Error in chat API:", error);
     return res.status(500).json({ 
-      error: "An error occurred while processing your request.",
+      error: 'Request failed',
       details: error instanceof Error ? error.message : 'Unknown error'
     });
   }
