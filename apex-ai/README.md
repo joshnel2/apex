@@ -32,52 +32,42 @@ You need the following environment variables:
    npm install
    ```
 
-2. Create a `.env.local` file in the `apex-ai` directory:
+2. Create a `.env.local` file in the `apex-ai` directory with your Azure credentials:
    ```bash
-   AZURE_OPENAI_API_KEY=your_api_key_here
+   AZURE_OPENAI_API_KEY=your_actual_api_key
    AZURE_OPENAI_ENDPOINT=https://your-resource-name.openai.azure.com
-   AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4
+   AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o-mini
    ```
 
 3. For local development with API routes working, use Vercel CLI:
    ```bash
    npm install -g vercel
-   cd apex-ai
    npm run dev:vercel
    ```
    
-   Note: Regular `npm run dev` won't work with API routes locally - you MUST use `vercel dev` or `npm run dev:vercel`
+   Note: Must use `vercel dev` for API routes to work locally
 
 ## Deploy to Vercel
 
-This project is configured for easy deployment to Vercel.
-
 ### Option 1: Deploy via Vercel CLI
 
-1. Install Vercel CLI:
+1. From the `apex-ai` directory:
    ```bash
-   npm i -g vercel
+   vercel --prod
    ```
 
-2. Deploy:
-   ```bash
-   vercel
-   ```
-
-3. Add environment variables in Vercel dashboard:
-   - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key
-   - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint (e.g., `https://your-resource-name.openai.azure.com`)
-   - `AZURE_OPENAI_DEPLOYMENT_NAME`: Your deployment name (optional, defaults to `gpt-4`)
+2. Add environment variables in Vercel dashboard:
+   - `AZURE_OPENAI_API_KEY`
+   - `AZURE_OPENAI_ENDPOINT`
+   - `AZURE_OPENAI_DEPLOYMENT_NAME`
 
 ### Option 2: Deploy via GitHub
 
-1. Push your code to a GitHub repository
-2. Import the project in [Vercel Dashboard](https://vercel.com/new)
-3. Add environment variables in project settings:
-   - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key
-   - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint
-   - `AZURE_OPENAI_DEPLOYMENT_NAME`: Your deployment name (optional, defaults to `gpt-4`)
-4. Deploy!
+1. Push code to GitHub
+2. Import at [Vercel Dashboard](https://vercel.com/new)
+3. Set root directory to `apex-ai`
+4. Add the 3 environment variables in project settings
+5. Deploy!
 
 ## Setting Up Azure OpenAI
 
