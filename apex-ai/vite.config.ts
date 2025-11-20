@@ -9,14 +9,8 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
-        proxy: {
-          '/api': {
-            target: 'http://localhost:3000',
-            changeOrigin: true,
-            // For local development, we'll need to run a separate API server
-            // or use Vercel CLI: vercel dev
-          }
-        }
+        // Note: For local development with API routes, use 'vercel dev' instead of 'npm run dev'
+        // This ensures the /api serverless functions work correctly
       },
       plugins: [react()],
       resolve: {

@@ -6,6 +6,8 @@
 
 This contains everything you need to run your app locally and deploy it to Vercel.
 
+> **⚠️ IMPORTANT:** For detailed setup instructions including Azure OpenAI configuration, see [SETUP_INSTRUCTIONS.md](../SETUP_INSTRUCTIONS.md) in the root directory.
+
 ## Environment Variables
 
 You need the following environment variables:
@@ -39,16 +41,14 @@ You need the following environment variables:
    AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4
    ```
 
-3. For local development with API routes, use Vercel CLI:
+3. For local development with API routes working, use Vercel CLI:
    ```bash
    npm install -g vercel
-   vercel dev
+   cd apex-ai
+   npm run dev:vercel
    ```
    
-   Or run the dev server (API won't work locally without Vercel CLI):
-   ```bash
-   npm run dev
-   ```
+   Note: Regular `npm run dev` won't work with API routes locally - you MUST use `vercel dev` or `npm run dev:vercel`
 
 ## Deploy to Vercel
 
