@@ -1,5 +1,3 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 const SYSTEM_INSTRUCTION = `
 You are Strapped AI, a sophisticated legal AI assistant demo designed for a law firm consultation website.
 Your purpose is to demonstrate the capability of AI to summarize complex text and draft simple clauses.
@@ -9,7 +7,7 @@ Keep responses professional, concise, and formatted for easy reading (markdown).
 Use a tone that is authoritative yet deferential to the attorney user.
 `;
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
