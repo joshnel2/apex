@@ -15,9 +15,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { prompt } = req.body;
+    let body: unknown = req.body;
 
-    if (!prompt || typeof prompt !== 'string') {
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch (parseError) {
+        console.error('Invalid JSON body received in /api/chat', parseError);
+        return res.status(400).json({ error: 'Invalid JSON payload' });
+      }
+    } else if (Buffer.isBuffer(body)) {
+      try {
+        body = JSON.parse(body.toString('utf-8'));
+      } catch (parseError) {
+        console.error('Invalid buffer body received in /api/chat', parseError);
+        return res.status(400).json({ error: 'Invalid JSON payload' });
+      }
+    }
+
+    const promptValue =
+      typeof body === 'object' && body !== null ? (body as { prompt?: unknown }).prompt : undefined;
+
+    const prompt = typeof promptValue === 'string' ? promptValue.trim() : '';
+
+    if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
