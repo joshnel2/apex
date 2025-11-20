@@ -25,23 +25,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
     const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o-mini';
 
+    console.log('Using Azure OpenAI deployment:', deploymentName);
+
     if (!apiKey || !endpoint) {
       console.error('Azure OpenAI credentials not configured', {
         hasApiKey: !!apiKey,
         hasEndpoint: !!endpoint,
-        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing'
+        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing',
+        deploymentName
       });
       return res.status(500).json({ 
         error: 'Azure OpenAI credentials not configured',
         debug: {
           hasApiKey: !!apiKey,
-          hasEndpoint: !!endpoint
+          hasEndpoint: !!endpoint,
+          deploymentName
         }
       });
     }
 
-    // Construct the full API URL
-    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-02-15-preview`;
+    // Construct the full API URL with updated API version
+    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-08-01-preview`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -60,6 +64,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             content: prompt,
           },
         ],
+        max_completion_tokens: 1000, // Use max_completion_tokens instead of max_tokens for newer models
+        // Note: GPT-5 mini only supports default temperature (1.0)
       }),
     });
 
