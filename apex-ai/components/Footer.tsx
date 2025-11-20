@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Scale, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Scale, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -17,10 +17,8 @@ export const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="mt-8 flex justify-center md:justify-end gap-6">
-          <a href="#" className="text-slate-600 hover:text-gold-500 transition-colors"><Linkedin size={20} /></a>
-          <a href="#" className="text-slate-600 hover:text-gold-500 transition-colors"><Twitter size={20} /></a>
-          <a href="#" className="text-slate-600 hover:text-gold-500 transition-colors"><Mail size={20} /></a>
+        <div className="mt-8 flex justify-center md:justify-end">
+          <a href="mailto:admin@strappedai.com" className="text-slate-600 hover:text-gold-500 transition-colors"><Mail size={20} /></a>
         </div>
       </div>
     </footer>
