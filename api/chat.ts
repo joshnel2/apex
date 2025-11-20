@@ -1,5 +1,3 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 const SYSTEM_INSTRUCTION = `
 You are Strapped AI, a sophisticated legal AI assistant demo designed for a law firm consultation website.
 Your purpose is to demonstrate the capability of AI to summarize complex text and draft simple clauses.
@@ -9,7 +7,17 @@ Keep responses professional, concise, and formatted for easy reading (markdown).
 Use a tone that is authoritative yet deferential to the attorney user.
 `;
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+const DEFAULT_DEPLOYMENT = 'gpt-4o-mini';
+const DEFAULT_API_VERSION = '2024-02-15-preview';
+
+const normalizeEndpoint = (endpoint: string) => {
+  const trimmed = endpoint.replace(/\/+$/, '');
+  return trimmed.toLowerCase().includes('/openai')
+    ? trimmed
+    : `${trimmed}/openai`;
+};
+
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -23,7 +31,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const apiKey = process.env.AZURE_OPENAI_API_KEY;
     const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
-    const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o-mini';
+    const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || DEFAULT_DEPLOYMENT;
+    const apiVersion = process.env.AZURE_OPENAI_API_VERSION || DEFAULT_API_VERSION;
 
     if (!apiKey || !endpoint) {
       console.error('Azure OpenAI credentials not configured', {
@@ -37,11 +46,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           hasApiKey: !!apiKey,
           hasEndpoint: !!endpoint
         }
-      });
-    }
+        });
+      }
 
-    // Construct the full API URL
-    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-02-15-preview`;
+      const apiUrl = `${normalizeEndpoint(endpoint)}/deployments/${deploymentName}/chat/completions?api-version=${apiVersion}`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -65,12 +73,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }),
     });
 
-    if (!response.ok) {
+      if (!response.ok) {
       const errorText = await response.text();
       console.error('Azure OpenAI API error:', response.status, errorText);
       return res.status(response.status).json({ 
-        error: `Azure OpenAI API error: ${response.status}`,
-        details: errorText 
+          error: `Azure OpenAI API error: ${response.status}`,
+          details: errorText,
+          endpoint: apiUrl
       });
     }
 
