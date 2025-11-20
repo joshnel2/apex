@@ -10,20 +10,13 @@ This contains everything you need to run your app locally and deploy it to Verce
 
 You need the following environment variables:
 
-### Required for Demo Chat:
+### Required:
 - **`AZURE_OPENAI_API_KEY`** - Your Azure OpenAI API key
   - Get this from: Azure Portal > Your Resource > Keys and Endpoint > Key 1 or Key 2
   
 - **`AZURE_OPENAI_ENDPOINT`** - Your Azure OpenAI endpoint URL
   - Format: `https://your-resource-name.openai.azure.com`
   - Get this from: Azure Portal > Your Resource > Keys and Endpoint
-
-### Required for Contact Form:
-- **`RESEND_API_KEY`** - Your Resend API key for sending contact form emails
-  - Sign up at: [resend.com](https://resend.com)
-  - Get your API key from: Resend Dashboard > API Keys
-  - Form submissions will be sent to: **admin@strappedai.com**
-  - Note: You'll need to verify your domain in Resend or use their testing domain
 
 ### Optional:
 - **`AZURE_OPENAI_DEPLOYMENT_NAME`** - Your deployment name (defaults to `gpt-4`)
@@ -44,7 +37,6 @@ You need the following environment variables:
    AZURE_OPENAI_API_KEY=your_api_key_here
    AZURE_OPENAI_ENDPOINT=https://your-resource-name.openai.azure.com
    AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4
-   RESEND_API_KEY=your_resend_api_key_here
    ```
 
 3. For local development with API routes, use Vercel CLI:
@@ -78,7 +70,6 @@ This project is configured for easy deployment to Vercel.
    - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key
    - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint (e.g., `https://your-resource-name.openai.azure.com`)
    - `AZURE_OPENAI_DEPLOYMENT_NAME`: Your deployment name (optional, defaults to `gpt-4`)
-   - `RESEND_API_KEY`: Your Resend API key for contact form emails
 
 ### Option 2: Deploy via GitHub
 
@@ -88,7 +79,6 @@ This project is configured for easy deployment to Vercel.
    - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key
    - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint
    - `AZURE_OPENAI_DEPLOYMENT_NAME`: Your deployment name (optional, defaults to `gpt-4`)
-   - `RESEND_API_KEY`: Your Resend API key for contact form emails
 4. Deploy!
 
 ## Setting Up Azure OpenAI
@@ -110,34 +100,12 @@ This project is configured for easy deployment to Vercel.
    - Copy the Endpoint URL (this is your `AZURE_OPENAI_ENDPOINT`)
    - Note your deployment name (this is your `AZURE_OPENAI_DEPLOYMENT_NAME`)
 
-## Setting Up Resend (Contact Form Emails)
+## Contact Form
 
-1. **Create a Resend account:**
-   - Go to [resend.com](https://resend.com) and sign up
-   - Verify your email address
-
-2. **Get your API key:**
-   - Navigate to "API Keys" in the Resend dashboard
-   - Click "Create API Key"
-   - Copy the API key (this is your `RESEND_API_KEY`)
-   - Store it securely - you won't be able to see it again
-
-3. **Domain setup (for production):**
-   - To send emails from your domain (e.g., noreply@strappedai.com), you need to verify your domain
-   - Go to "Domains" in Resend dashboard
-   - Add your domain (strappedai.com)
-   - Add the DNS records provided by Resend to your DNS provider
-   - Wait for verification (usually takes a few minutes)
-   
-4. **For testing:**
-   - Resend provides a testing domain `onboarding@resend.dev` that works immediately
-   - You can use this for development and testing
-   - Production should use your verified domain
-
-5. **Email delivery:**
-   - All contact form submissions will be sent to: **admin@strappedai.com**
-   - Make sure this email address is valid and monitored
-   - The email includes all form details: firm name, contact name, email, interest, and message
+The contact form uses Google Forms for submissions:
+- The "Contact" section includes a button that opens the consultation request form in a new window
+- Form submissions are automatically collected in Google Sheets
+- No additional setup required - the form link is configured in the code
 
 ## Project Features
 
@@ -148,3 +116,4 @@ The project is pre-configured with:
 - ✅ Vite framework detection
 - ✅ Secure serverless API routes (API keys never exposed to client)
 - ✅ Microsoft Azure OpenAI integration
+- ✅ Google Forms integration for contact submissions

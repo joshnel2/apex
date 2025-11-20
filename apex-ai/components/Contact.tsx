@@ -1,72 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from './Button';
-import { ServiceType, ContactFormData } from '../types';
-import { CheckCircle } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdU63ydK0CFHnvbq630EbWlJ1ED3cKP4nhWlvwOUOCr9PE7WA/viewform?usp=dialog';
 
 export const Contact: React.FC = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState<ContactFormData>({
-    firmName: '',
-    contactName: '',
-    email: '',
-    interest: ServiceType.CONFIDENTIAL_LLM,
-    message: ''
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const handleOpenForm = () => {
+    window.open(GOOGLE_FORM_URL, '_blank', 'noopener,noreferrer');
   };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to submit form');
-      }
-
-      setIsSubmitted(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred. Please try again.');
-      console.error('Form submission error:', err);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  if (isSubmitted) {
-    return (
-      <section id="contact" className="py-24 bg-slate-950">
-        <div className="container mx-auto px-4 max-w-md text-center">
-          <div className="glass-panel p-8 rounded-xl border border-green-500/20">
-            <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500">
-              <CheckCircle size={32} />
-            </div>
-            <h3 className="text-2xl font-serif text-white mb-4">Request Received</h3>
-            <p className="text-slate-400 mb-6">
-              Thank you for your interest, {formData.contactName}. One of our senior technical consultants will contact you at {formData.email} within 24 hours to schedule a discovery call.
-            </p>
-            <Button variant="outline" onClick={() => setIsSubmitted(false)}>Return to Form</Button>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="contact" className="py-24 bg-slate-950 border-t border-slate-900">
@@ -104,83 +45,42 @@ export const Contact: React.FC = () => {
 
           <div className="glass-panel p-8 rounded-xl border border-slate-800">
             <h4 className="text-xl font-semibold text-white mb-6">Confidential Consultation Request</h4>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Firm Name</label>
-                <input
-                  required
-                  type="text"
-                  name="firmName"
-                  value={formData.firmName}
-                  onChange={handleChange}
-                  className="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded focus:outline-none focus:border-gold-500 transition-colors"
-                />
-              </div>
+            
+            <div className="space-y-6">
+              <p className="text-slate-400 text-base leading-relaxed">
+                Ready to secure your firm's AI infrastructure? Complete our brief consultation request form to get started.
+              </p>
               
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Contact Name</label>
-                <input
-                  required
-                  type="text"
-                  name="contactName"
-                  value={formData.contactName}
-                  onChange={handleChange}
-                  className="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded focus:outline-none focus:border-gold-500 transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Professional Email</label>
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded focus:outline-none focus:border-gold-500 transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Primary Interest</label>
-                <div className="relative">
-                  <select
-                    name="interest"
-                    value={formData.interest}
-                    onChange={handleChange}
-                    className="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded focus:outline-none focus:border-gold-500 transition-colors appearance-none"
-                  >
-                    <option value={ServiceType.CONFIDENTIAL_LLM}>{ServiceType.CONFIDENTIAL_LLM}</option>
-                    <option value={ServiceType.AGENT_BUILDING}>{ServiceType.AGENT_BUILDING}</option>
-                    <option value={ServiceType.DATA_SECURITY}>{ServiceType.DATA_SECURITY}</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
-                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                  </div>
+              <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></div>
+                  <p className="text-slate-300 text-sm">
+                    Our team will review your submission within 24 hours
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></div>
+                  <p className="text-slate-300 text-sm">
+                    A senior technical consultant will reach out to schedule a discovery call
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></div>
+                  <p className="text-slate-300 text-sm">
+                    All information is kept strictly confidential
+                  </p>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-400 mb-2">Brief Message (Optional)</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={3}
-                  className="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded focus:outline-none focus:border-gold-500 transition-colors"
-                ></textarea>
-              </div>
-
-              {error && (
-                <div className="bg-red-900/20 border border-red-500/50 text-red-300 px-4 py-3 rounded text-sm">
-                  {error}
-                </div>
-              )}
-
-              <Button type="submit" className="w-full mt-2" disabled={isSubmitting}>
-                {isSubmitting ? 'Submitting...' : 'Submit Request'}
+              <Button onClick={handleOpenForm} className="w-full flex items-center justify-center gap-2">
+                <span>Open Consultation Form</span>
+                <ExternalLink size={18} />
               </Button>
-            </form>
+
+              <p className="text-xs text-slate-500 text-center">
+                Form opens in a new window for your convenience
+              </p>
+            </div>
           </div>
         </div>
       </div>
