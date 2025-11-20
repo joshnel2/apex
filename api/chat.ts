@@ -13,11 +13,36 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const { prompt } = req.body;
+      const parseRequestBody = () => {
+        if (!req.body) return null;
 
-    if (!prompt || typeof prompt !== 'string') {
-      return res.status(400).json({ error: 'Prompt is required' });
-    }
+        if (typeof req.body === 'string') {
+          try {
+            return JSON.parse(req.body);
+          } catch (error) {
+            console.error('Invalid JSON body received', error);
+            return null;
+          }
+        }
+
+        if (Buffer.isBuffer(req.body)) {
+          try {
+            return JSON.parse(req.body.toString('utf8'));
+          } catch (error) {
+            console.error('Invalid buffer body received', error);
+            return null;
+          }
+        }
+
+        return req.body;
+      };
+
+      const body = parseRequestBody();
+      const prompt = typeof body?.prompt === 'string' ? body.prompt.trim() : '';
+
+      if (!prompt) {
+        return res.status(400).json({ error: 'Prompt is required' });
+      }
 
     const apiKey = process.env.AZURE_OPENAI_API_KEY;
     const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
