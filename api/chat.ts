@@ -60,8 +60,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             content: prompt,
           },
         ],
-        temperature: 1,
-        max_completion_tokens: 2000,
       }),
     });
 
