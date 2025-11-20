@@ -29,13 +29,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error('Azure OpenAI credentials not configured', {
         hasApiKey: !!apiKey,
         hasEndpoint: !!endpoint,
+        deploymentName: deploymentName,
         endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing'
       });
       return res.status(500).json({ 
-        error: 'Azure OpenAI credentials not configured',
+        error: 'Azure OpenAI credentials not configured. Please set AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT, and AZURE_OPENAI_DEPLOYMENT_NAME environment variables.',
         debug: {
           hasApiKey: !!apiKey,
-          hasEndpoint: !!endpoint
+          hasEndpoint: !!endpoint,
+          hasDeploymentName: !!deploymentName
         }
       });
     }
