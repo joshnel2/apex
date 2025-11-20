@@ -23,31 +23,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const apiKey = process.env.AZURE_OPENAI_API_KEY;
     const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
-    const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o-mini';
+    const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME;
 
-    if (!apiKey || !endpoint) {
-      console.error('Azure OpenAI credentials not configured', {
-        hasApiKey: !!apiKey,
-        hasEndpoint: !!endpoint,
-        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing'
-      });
-      return res.status(500).json({ 
-        error: 'Azure OpenAI credentials not configured',
-        debug: {
-          hasApiKey: !!apiKey,
-          hasEndpoint: !!endpoint
-        }
-      });
-    }
-
-    // Construct the full API URL
-    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-02-15-preview`;
+    const apiUrl = `${endpoint}/v1/chat/completions`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'api-key': apiKey,
+        'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         messages: [
@@ -60,6 +44,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             content: prompt,
           },
         ],
+        model: deploymentName,
         temperature: 0.3,
         max_tokens: 2000,
       }),
