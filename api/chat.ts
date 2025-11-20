@@ -40,8 +40,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // Construct the full API URL
-    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-02-15-preview`;
+    // Construct the full API URL with updated API version
+    const apiUrl = `${endpoint}/openai/deployments/${deploymentName}/chat/completions?api-version=2024-08-01-preview`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -60,6 +60,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             content: prompt,
           },
         ],
+        max_completion_tokens: 1000, // Use max_completion_tokens instead of max_tokens for newer models
+        temperature: 0.7,
       }),
     });
 
