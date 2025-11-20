@@ -6,8 +6,6 @@
 
 This contains everything you need to run your app locally and deploy it to Vercel.
 
-> **⚠️ IMPORTANT:** For detailed setup instructions including Azure OpenAI configuration, see [SETUP_INSTRUCTIONS.md](../SETUP_INSTRUCTIONS.md) in the root directory.
-
 ## Environment Variables
 
 You need the following environment variables:
