@@ -25,17 +25,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
     const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o-mini';
 
+    console.log('Using Azure OpenAI deployment:', deploymentName);
+
     if (!apiKey || !endpoint) {
       console.error('Azure OpenAI credentials not configured', {
         hasApiKey: !!apiKey,
         hasEndpoint: !!endpoint,
-        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing'
+        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing',
+        deploymentName
       });
       return res.status(500).json({ 
         error: 'Azure OpenAI credentials not configured',
         debug: {
           hasApiKey: !!apiKey,
-          hasEndpoint: !!endpoint
+          hasEndpoint: !!endpoint,
+          deploymentName
         }
       });
     }
