@@ -145,9 +145,7 @@ export const Demo: React.FC = () => {
                       className={`max-w-[85%] rounded-lg p-4 text-sm leading-relaxed ${
                         msg.role === 'user' 
                           ? 'bg-gold-600 text-white rounded-br-none' 
-                          : msg.content.startsWith('⚠️')
-                            ? 'bg-red-900/30 text-red-200 border border-red-700 rounded-bl-none'
-                            : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-bl-none'
+                          : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-bl-none'
                       }`}
                     >
                       <div className="whitespace-pre-wrap">{msg.content}</div>
