@@ -60,6 +60,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             content: prompt,
           },
         ],
+        max_completion_tokens: 2000,
       }),
     });
 
