@@ -65,7 +65,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           },
         ],
         max_completion_tokens: 1000, // Use max_completion_tokens instead of max_tokens for newer models
-        temperature: 0.7,
+        // Note: GPT-5 mini only supports default temperature (1.0)
       }),
     });
 
