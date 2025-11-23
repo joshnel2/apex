@@ -26,20 +26,36 @@ export const Services: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h2 className="text-gold-500 font-medium uppercase tracking-wider text-sm mb-3">Our Product Suite</h2>
           <h3 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
-            Four Powerful Products.<br/>One Honest Price.
+            Four Enterprise Products.<br/>No Per-User Pricing.
           </h3>
           <p className="text-slate-300 mb-6 text-lg">
-            Stop paying <strong className="text-white">$200/month per user</strong> for repackaged consumer AI. Get real enterprise tools powered by Microsoft Azure at a fraction of the cost.
+            Our competitors charge up to <strong className="text-red-400">$200/user/month</strong> for basic repackaged AI. We give you <strong className="text-white">real Microsoft Azure enterprise technology</strong> for your entire firm.
           </p>
           <div className="inline-flex flex-col items-center gap-3">
-            <div className="flex items-center gap-4 px-6 py-3 rounded-lg bg-slate-900 border border-gold-500/50">
-              <span className="text-white text-xl font-bold">$3,000</span>
-              <span className="text-slate-400">Installation</span>
-              <span className="text-slate-600">+</span>
-              <span className="text-white text-xl font-bold">Monthly Maintenance</span>
-              <span className="text-slate-400 text-sm">(based on firm size)</span>
+            <div className="bg-gradient-to-r from-slate-900 to-slate-800 border-2 border-gold-500 rounded-xl px-8 py-6 shadow-2xl">
+              <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+                <div>
+                  <div className="text-gold-400 text-4xl font-bold">$3,000</div>
+                  <div className="text-slate-400 text-xs">one-time installation</div>
+                </div>
+                <div className="text-slate-600 text-3xl hidden md:block">+</div>
+                <div>
+                  <div className="text-white text-2xl font-bold">Monthly Maintenance</div>
+                  <div className="text-slate-400 text-xs">scales with firm size</div>
+                </div>
+              </div>
+              <div className="mt-4 pt-4 border-t border-slate-700 text-center">
+                <p className="text-green-400 font-bold text-sm">✓ All 4 Products Included</p>
+                <p className="text-slate-500 text-xs mt-1">No hidden fees • No per-user charges • Unlimited usage</p>
+              </div>
             </div>
-            <p className="text-slate-500 text-sm">Integration completed in 1 day • Custom solutions available</p>
+            <div className="flex items-center gap-4 text-xs text-slate-400">
+              <span>⚡ 1-day integration</span>
+              <span>•</span>
+              <span>🔒 Private Azure deployment</span>
+              <span>•</span>
+              <span>🛠️ Custom solutions available</span>
+            </div>
           </div>
         </div>
 

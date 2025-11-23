@@ -18,15 +18,66 @@ export const Hero: React.FC<{ onConsultClick: () => void }> = ({ onConsultClick 
         </div>
         
         <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-tight leading-tight">
-          Enterprise AI at a <br/>
+          Stop Overpaying for <br/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
-            Fraction of the Cost
+            Repackaged AI Software
           </span>
         </h1>
         
-        <p className="mt-4 max-w-3xl mx-auto text-xl text-slate-400 mb-10 font-light">
-          While competitors charge <strong className="text-white">$200/month per user</strong> for repackaged software, we give you direct access to <strong>Microsoft Azure</strong> enterprise AI for just <strong className="text-white">$3,000 installation + monthly maintenance</strong> based on firm size. We're not middlemen selling software—we're your bridge to enterprise AI that stays completely private for your law firm.
+        <p className="mt-4 max-w-3xl mx-auto text-xl text-slate-300 mb-8 font-light">
+          Get direct access to <strong className="text-white">Microsoft Azure</strong> enterprise AI—no middlemen, no markup, no per-user fees. We're your bridge to real enterprise technology that stays completely private.
         </p>
+
+        {/* Pricing Comparison */}
+        <div className="max-w-4xl mx-auto mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Competitor Pricing */}
+            <div className="relative bg-red-950/20 border-2 border-red-900/50 rounded-xl p-6 opacity-75">
+              <div className="absolute -top-3 left-6 bg-red-900 text-white text-xs font-bold px-3 py-1 rounded-full">
+                COMPETITORS
+              </div>
+              <div className="text-center mt-2">
+                <div className="text-red-400 text-5xl font-bold mb-2">$200</div>
+                <div className="text-red-300 text-sm mb-3">per user, per month</div>
+                <div className="text-slate-400 text-xs space-y-1">
+                  <div>❌ Repackaged consumer AI</div>
+                  <div>❌ Recurring per-user fees</div>
+                  <div>❌ Expensive at scale</div>
+                </div>
+                <div className="mt-4 text-red-300 text-xl font-bold">
+                  50 users = $120,000/year
+                </div>
+              </div>
+            </div>
+
+            {/* Our Pricing */}
+            <div className="relative bg-gradient-to-br from-gold-900/30 to-gold-950/20 border-2 border-gold-500 rounded-xl p-6 shadow-xl shadow-gold-500/20">
+              <div className="absolute -top-3 left-6 bg-gold-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full">
+                STRAPPED AI
+              </div>
+              <div className="text-center mt-2">
+                <div className="text-gold-400 text-5xl font-bold mb-2">$3,000</div>
+                <div className="text-gold-300 text-sm mb-3">one-time installation</div>
+                <div className="text-slate-300 text-xs space-y-1">
+                  <div>✓ Real Microsoft Azure AI</div>
+                  <div>✓ Unlimited firm-wide use</div>
+                  <div>✓ All 4 products included</div>
+                </div>
+                <div className="mt-4 text-white text-lg">
+                  + <span className="font-bold">Monthly Maintenance</span>
+                  <div className="text-xs text-slate-400">(based on firm size)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-6 text-center">
+            <p className="text-green-400 text-lg font-bold">
+              Save over <span className="text-2xl">$100,000/year</span> for a typical 50-person firm
+            </p>
+            <p className="text-slate-400 text-sm mt-2">1-day integration • Custom solutions available • Private Azure deployment</p>
+          </div>
+        </div>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
           <Button size="lg" onClick={onConsultClick}>
