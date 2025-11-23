@@ -18,14 +18,17 @@ export const Hero: React.FC<{ onConsultClick: () => void }> = ({ onConsultClick 
         </div>
         
         <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-tight leading-tight">
-          Stop Overpaying for <br/>
+          Get Everything They're Selling<br/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
-            Repackaged AI Software
+            Without the Markup
           </span>
         </h1>
         
-        <p className="mt-4 max-w-3xl mx-auto text-xl text-slate-300 mb-8 font-light">
-          Get direct access to <strong className="text-white">Microsoft Azure</strong> enterprise AI—no middlemen, no markup, no per-user fees. We're your bridge to real enterprise technology that stays completely private.
+        <p className="mt-4 max-w-3xl mx-auto text-xl text-slate-300 mb-4 font-light">
+          Other AI companies are just reselling access to <strong className="text-white">Microsoft Azure</strong> with massive markups. We give you <strong className="text-white">the exact same enterprise AI</strong>—directly, privately, and at honest pricing.
+        </p>
+        <p className="max-w-2xl mx-auto text-lg text-gold-400 mb-8 font-medium">
+          Same technology. Same capabilities. No middleman. No ripoff.
         </p>
 
         {/* Pricing Comparison */}
@@ -34,17 +37,21 @@ export const Hero: React.FC<{ onConsultClick: () => void }> = ({ onConsultClick 
             {/* Competitor Pricing */}
             <div className="relative bg-red-950/20 border-2 border-red-900/50 rounded-xl p-6 opacity-75">
               <div className="absolute -top-3 left-6 bg-red-900 text-white text-xs font-bold px-3 py-1 rounded-full">
-                COMPETITORS
+                OTHER AI COMPANIES
               </div>
               <div className="text-center mt-2">
                 <div className="text-red-400 text-5xl font-bold mb-2">$200</div>
                 <div className="text-red-300 text-sm mb-3">per user, per month</div>
-                <div className="text-slate-400 text-xs space-y-1">
-                  <div>❌ Repackaged consumer AI</div>
+                <div className="text-slate-400 text-xs space-y-1 mb-3">
+                  <div>❌ Same Azure AI (marked up)</div>
                   <div>❌ Recurring per-user fees</div>
-                  <div>❌ Expensive at scale</div>
+                  <div>❌ Just middlemen reselling</div>
                 </div>
-                <div className="mt-4 text-red-300 text-xl font-bold">
+                <div className="bg-red-950/40 rounded py-2 px-3 mb-2">
+                  <div className="text-red-200 text-xs font-bold">What you actually get:</div>
+                  <div className="text-slate-400 text-[10px]">Azure LLM access they're reselling to you</div>
+                </div>
+                <div className="mt-3 text-red-300 text-xl font-bold">
                   50 users = $120,000/year
                 </div>
               </div>
@@ -53,19 +60,23 @@ export const Hero: React.FC<{ onConsultClick: () => void }> = ({ onConsultClick 
             {/* Our Pricing */}
             <div className="relative bg-gradient-to-br from-gold-900/30 to-gold-950/20 border-2 border-gold-500 rounded-xl p-6 shadow-xl shadow-gold-500/20">
               <div className="absolute -top-3 left-6 bg-gold-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full">
-                STRAPPED AI
+                STRAPPED AI (DIRECT)
               </div>
               <div className="text-center mt-2">
                 <div className="text-gold-400 text-5xl font-bold mb-2">$3,000</div>
                 <div className="text-gold-300 text-sm mb-3">one-time installation</div>
-                <div className="text-slate-300 text-xs space-y-1">
-                  <div>✓ Real Microsoft Azure AI</div>
+                <div className="text-slate-300 text-xs space-y-1 mb-3">
+                  <div>✓ Same Microsoft Azure AI</div>
                   <div>✓ Unlimited firm-wide use</div>
-                  <div>✓ All 4 products included</div>
+                  <div>✓ No per-user fees ever</div>
                 </div>
-                <div className="mt-4 text-white text-lg">
+                <div className="bg-green-950/40 rounded py-2 px-3 mb-2">
+                  <div className="text-green-300 text-xs font-bold">What you actually get:</div>
+                  <div className="text-slate-300 text-[10px]">Everything they sell + 3 more products</div>
+                </div>
+                <div className="mt-3 text-white text-lg">
                   + <span className="font-bold">Monthly Maintenance</span>
-                  <div className="text-xs text-slate-400">(based on firm size)</div>
+                  <div className="text-xs text-slate-400">(scales with firm size)</div>
                 </div>
               </div>
             </div>

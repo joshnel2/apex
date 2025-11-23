@@ -26,10 +26,14 @@ export const Services: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h2 className="text-gold-500 font-medium uppercase tracking-wider text-sm mb-3">Our Product Suite</h2>
           <h3 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
-            Four Enterprise Products.<br/>No Per-User Pricing.
+            Everything They're Selling<br/>
+            <span className="text-gold-500">Plus Three More Products</span>
           </h3>
-          <p className="text-slate-300 mb-6 text-lg">
-            Our competitors charge up to <strong className="text-red-400">$200/user/month</strong> for basic repackaged AI. We give you <strong className="text-white">real Microsoft Azure enterprise technology</strong> for your entire firm.
+          <p className="text-slate-300 mb-4 text-lg">
+            Competitors charge <strong className="text-red-400">$200/user/month</strong> for a basic chatbot using Azure AI. We give you <strong className="text-white">direct access to that same Azure AI</strong> PLUS a redline tool, document analyzer, and research AI—for your entire firm.
+          </p>
+          <p className="text-gold-400 mb-6 text-base font-medium">
+            They're reselling what we're giving you directly. Stop paying the middleman markup.
           </p>
           <div className="inline-flex flex-col items-center gap-3">
             <div className="bg-gradient-to-r from-slate-900 to-slate-800 border-2 border-gold-500 rounded-xl px-8 py-6 shadow-2xl">
@@ -45,8 +49,8 @@ export const Services: React.FC = () => {
                 </div>
               </div>
               <div className="mt-4 pt-4 border-t border-slate-700 text-center">
-                <p className="text-green-400 font-bold text-sm">✓ All 4 Products Included</p>
-                <p className="text-slate-500 text-xs mt-1">No hidden fees • No per-user charges • Unlimited usage</p>
+                <p className="text-green-400 font-bold text-sm">✓ All 4 Products Included (They Only Sell 1)</p>
+                <p className="text-slate-500 text-xs mt-1">No hidden fees • No per-user charges • Unlimited firm-wide usage</p>
               </div>
             </div>
             <div className="flex items-center gap-4 text-xs text-slate-400">
@@ -107,6 +111,94 @@ export const Services: React.FC = () => {
               "Custom research workflows for your practice areas"
             ]}
           />
+        </div>
+
+        {/* What You Get vs What They Sell */}
+        <div className="max-w-5xl mx-auto mb-20 bg-slate-900/60 border border-slate-800 rounded-xl p-8">
+          <h4 className="text-center text-2xl font-serif font-bold text-white mb-8">
+            What Are They Actually Selling You?
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <div className="bg-red-950/20 border border-red-900/50 rounded-lg p-6">
+                <h5 className="text-red-400 font-bold mb-4 text-center">What Competitors Give You</h5>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <span className="text-red-400 text-lg">1.</span>
+                    <div>
+                      <p className="text-white font-medium">AI Chatbot</p>
+                      <p className="text-slate-400 text-xs">(Azure LLM with markup)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-slate-600 text-lg">2.</span>
+                    <div>
+                      <p className="text-slate-600 font-medium line-through">Nothing</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-slate-600 text-lg">3.</span>
+                    <div>
+                      <p className="text-slate-600 font-medium line-through">Nothing</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-slate-600 text-lg">4.</span>
+                    <div>
+                      <p className="text-slate-600 font-medium line-through">Nothing</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 pt-4 border-t border-red-900/50 text-center">
+                  <p className="text-red-300 text-2xl font-bold">$120,000/year</p>
+                  <p className="text-slate-500 text-xs">(for 50 users)</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="bg-gradient-to-br from-gold-900/20 to-green-900/20 border-2 border-gold-500 rounded-lg p-6">
+                <h5 className="text-gold-400 font-bold mb-4 text-center">What You Get From Us</h5>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <span className="text-gold-400 text-lg">1.</span>
+                    <div>
+                      <p className="text-white font-medium">Firm-Wide LLM</p>
+                      <p className="text-slate-300 text-xs">(Same Azure AI, direct access)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-gold-400 text-lg">2.</span>
+                    <div>
+                      <p className="text-white font-medium">Redline Tool</p>
+                      <p className="text-slate-300 text-xs">(Document comparison AI)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-gold-400 text-lg">3.</span>
+                    <div>
+                      <p className="text-white font-medium">Document Analyzer</p>
+                      <p className="text-slate-300 text-xs">(Massive file processing)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-gold-400 text-lg">4.</span>
+                    <div>
+                      <p className="text-white font-medium">Research AI</p>
+                      <p className="text-slate-300 text-xs">(Law library integration)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 pt-4 border-t border-gold-700/50 text-center">
+                  <p className="text-gold-400 text-2xl font-bold">$3,000 + Maintenance</p>
+                  <p className="text-slate-400 text-xs">(entire firm, unlimited use)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 text-center">
+            <p className="text-white text-xl font-bold mb-2">Same Enterprise AI. 4X More Products. 10X Less Cost.</p>
+            <p className="text-slate-400 text-sm">Stop paying middlemen to resell what we give you directly.</p>
+          </div>
         </div>
 
         {/* Client Success Story */}
