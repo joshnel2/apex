@@ -91,12 +91,6 @@ export const Demo: React.FC = () => {
             </p>
             
             {/* Testimonial Box */}
-            <div className="bg-slate-800/50 border-l-4 border-gold-500 p-4 rounded-r-lg">
-              <p className="text-sm text-slate-300 italic">
-                "We deployed all four products in one day. Our entire firm now has access to private AI for what other companies charge per user, per month. It's not even close."
-              </p>
-              <p className="text-xs text-slate-500 mt-2 font-bold">- Managing Partner, Dorf Nelson & Zauderer</p>
-            </div>
 
             {/* New Insight Tracking Section */}
             <div className="mt-6 pt-6 border-t border-slate-800">
