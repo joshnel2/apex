@@ -14,7 +14,7 @@ export const Hero: React.FC<{ onConsultClick: () => void }> = ({ onConsultClick 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center flex-grow flex flex-col justify-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-gold-500 text-sm font-medium mb-8 animate-fade-in-up mx-auto backdrop-blur-sm">
           <ShieldCheck size={14} />
-          <span>Private Enterprise AI • No Data Mining</span>
+          <span>Private Enterprise AI for Law Firms • No Data Mining</span>
         </div>
         
         <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-tight leading-tight">
