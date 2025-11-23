@@ -43,6 +43,10 @@ export const Contact: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-2 text-slate-300 text-sm">
                     <CheckCircle2 size={16} className="text-gold-500" />
+                    <span>Always updated with best models</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-300 text-sm">
+                    <CheckCircle2 size={16} className="text-gold-500" />
                     <span>Custom solutions available</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-300 text-sm">

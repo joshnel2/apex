@@ -53,10 +53,12 @@ export const Services: React.FC = () => {
                 <p className="text-slate-500 text-xs mt-1">No hidden fees • No per-user charges • Unlimited firm-wide usage</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 text-xs text-slate-400">
+            <div className="flex flex-wrap justify-center gap-4 text-xs text-slate-400">
               <span>⚡ 1-day integration</span>
               <span>•</span>
               <span>🔒 Private Azure deployment</span>
+              <span>•</span>
+              <span>🔄 Always updated with latest models</span>
               <span>•</span>
               <span>🛠️ Custom solutions available</span>
             </div>

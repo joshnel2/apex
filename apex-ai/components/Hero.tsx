@@ -109,16 +109,16 @@ export const Hero: React.FC<{ onConsultClick: () => void }> = ({ onConsultClick 
           </div>
           <div className="glass-panel p-6 rounded-lg border border-slate-800 hover:border-gold-500/30 transition-colors bg-slate-900/60">
             <Cpu className="text-gold-500 mb-4" size={32} />
-            <h3 className="text-lg font-semibold text-white mb-2">Your Data Stays Private</h3>
+            <h3 className="text-lg font-semibold text-white mb-2">Always Up-to-Date</h3>
             <p className="text-slate-400 text-sm">
-              Built on Microsoft Azure's secure infrastructure. Zero data mining. Zero third-party access. Complete confidentiality for law firms.
+              We continuously update your system with the latest and most powerful AI models. You always get the best technology available—automatically.
             </p>
           </div>
           <div className="glass-panel p-6 rounded-lg border border-slate-800 hover:border-gold-500/30 transition-colors bg-slate-900/60">
             <ShieldCheck className="text-gold-500 mb-4" size={32} />
-            <h3 className="text-lg font-semibold text-white mb-2">Real Enterprise AI</h3>
+            <h3 className="text-lg font-semibold text-white mb-2">Completely Private</h3>
             <p className="text-slate-400 text-sm">
-              Direct access to Azure's enterprise models. Not repackaged consumer tools. Not overpriced middleware. Just the real deal at honest pricing.
+              Built on Microsoft Azure's secure infrastructure. Zero data mining. Zero third-party access. Complete confidentiality for law firms.
             </p>
           </div>
         </div>
