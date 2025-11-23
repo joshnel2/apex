@@ -76,7 +76,7 @@ export const Hero: React.FC<{ onConsultClick: () => void }> = ({ onConsultClick 
                 </div>
                 <div className="mt-3 text-white text-lg">
                   + <span className="font-bold">Monthly Maintenance</span>
-                  <div className="text-xs text-slate-400">(scales with firm size)</div>
+                  <div className="text-xs text-slate-400">(scales with firm size and compute)</div>
                 </div>
               </div>
             </div>

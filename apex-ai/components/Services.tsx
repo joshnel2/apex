@@ -45,7 +45,7 @@ export const Services: React.FC = () => {
                 <div className="text-slate-600 text-3xl hidden md:block">+</div>
                 <div>
                   <div className="text-white text-2xl font-bold">Monthly Maintenance</div>
-                  <div className="text-slate-400 text-xs">scales with firm size</div>
+                  <div className="text-slate-400 text-xs">scales with firm size and compute</div>
                 </div>
               </div>
               <div className="mt-4 pt-4 border-t border-slate-700 text-center">
