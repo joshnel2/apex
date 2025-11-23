@@ -22,10 +22,10 @@ export const Navbar: React.FC<{ onConsultClick: () => void }> = ({ onConsultClic
         </div>
         
         <div className="hidden md:flex items-center gap-8">
-          <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth'})} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Services</button>
+          <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth'})} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Products</button>
           <button onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth'})} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Demo</button>
           <Button variant="outline" size="sm" onClick={onConsultClick}>
-            Consultation
+            Get Started
           </Button>
         </div>
       </div>

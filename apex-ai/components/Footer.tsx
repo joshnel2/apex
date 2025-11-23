@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
           
           <div className="text-slate-500 text-sm text-center md:text-right">
             <p className="mb-2">&copy; {new Date().getFullYear()} Strapped AI Solutions. All rights reserved.</p>
-            <p>Strictly Confidential. For Authorized Use Only.</p>
+            <p>Enterprise AI for Law Firms • Honest Pricing • Private Deployment</p>
           </div>
         </div>
         

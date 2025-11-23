@@ -9,7 +9,7 @@ export const Demo: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { 
       role: 'model', 
-      content: 'Welcome to the Strapped AI Architecture Demo. I am a secure agent prototype. You can ask me to summarize a legal concept or draft a standard clause to see how our fine-tuned models perform. \n\n*Note: In a live deployment, I would have secure access to your firm\'s Document Management System.*',
+      content: 'Welcome to the Strapped AI Product Demo. This is a live demonstration of our Firm-Wide LLM product. Ask me to summarize a legal concept or draft a standard clause to see our enterprise AI in action.\n\n*Note: Your firm\'s deployment would include secure access to your Document Management System and law library.*',
       timestamp: Date.now() 
     }
   ]);
@@ -84,18 +84,18 @@ export const Demo: React.FC = () => {
               <span>Live Prototype</span>
             </div>
             <h3 className="text-3xl md:text-4xl font-serif font-bold text-white">
-              Experience Intelligent Assistance
+              Test Drive Our Firm-Wide LLM
             </h3>
             <p className="text-slate-400 text-lg">
-              This demo utilizes a generic model to showcase response latency and formatting. 
+              This live demo shows what you get with our product—no sales pitch, just the actual technology you'll deploy.
             </p>
             
             {/* Testimonial Box */}
             <div className="bg-slate-800/50 border-l-4 border-gold-500 p-4 rounded-r-lg">
               <p className="text-sm text-slate-300 italic">
-                "Our firm's custom implementation allows us to upload 500+ page PDFs and get instant conflict analysis without the data ever touching the public internet."
+                "We deployed all four products in one day. Our entire firm now has access to private AI for what other companies charge per user, per month. It's not even close."
               </p>
-              <p className="text-xs text-slate-500 mt-2 font-bold">- Partner, Am Law 100 Firm</p>
+              <p className="text-xs text-slate-500 mt-2 font-bold">- Managing Partner, Dorf Nelson & Zauderer</p>
             </div>
 
             {/* New Insight Tracking Section */}
@@ -133,7 +133,7 @@ export const Demo: React.FC = () => {
               <div className="bg-slate-800 p-4 border-b border-slate-700 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-sm font-medium text-white">Strapped AI Agent v2.1 (Demo Mode)</span>
+                  <span className="text-sm font-medium text-white">Strapped AI Firm-Wide LLM (Demo)</span>
                 </div>
                 <span className="text-xs text-slate-500">Secure Connection</span>
               </div>
