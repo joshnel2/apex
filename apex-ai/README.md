@@ -33,6 +33,8 @@ You need the following environment variables:
 - **`AZURE_OPENAI_DEPLOYMENT_NAME`** - Your deployment name (defaults to `gpt-4`)
   - This is the name you gave your model deployment in Azure
   - Common values: `gpt-4`, `gpt-35-turbo`, `gpt-4-turbo`
+- **`AZURE_OPENAI_API_VERSION`** - API version required by your Azure region/resource (defaults to `2024-02-15-preview`)
+  - Set this if your Azure AI Foundry deployment requires a newer preview version
 
 ## Run Locally
 
@@ -81,6 +83,7 @@ This project is configured for easy deployment to Vercel.
    - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key
    - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint (e.g., `https://your-resource-name.openai.azure.com`)
    - `AZURE_OPENAI_DEPLOYMENT_NAME`: Your deployment name (optional, defaults to `gpt-4`)
+   - `AZURE_OPENAI_API_VERSION`: API version if different from the default (`2024-02-15-preview`)
 
 ### Option 2: Deploy via GitHub
 
@@ -90,6 +93,7 @@ This project is configured for easy deployment to Vercel.
    - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key
    - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint
    - `AZURE_OPENAI_DEPLOYMENT_NAME`: Your deployment name (optional, defaults to `gpt-4`)
+   - `AZURE_OPENAI_API_VERSION`: API version if your deployment requires a newer preview
 4. Deploy!
 
 ## Setting Up Azure OpenAI

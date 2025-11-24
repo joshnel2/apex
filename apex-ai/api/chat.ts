@@ -38,18 +38,19 @@ export default async function handler(req: any, res: any) {
       console.error('Azure OpenAI credentials not configured', {
         hasApiKey: !!apiKey,
         hasEndpoint: !!endpoint,
-        endpoint: endpoint ? endpoint.substring(0, 20) + '...' : 'missing'
+        endpoint: endpoint ? `${endpoint.substring(0, 20)}...` : 'missing'
       });
-      return res.status(500).json({ 
+
+      return res.status(500).json({
         error: 'Azure OpenAI credentials not configured',
         debug: {
           hasApiKey: !!apiKey,
           hasEndpoint: !!endpoint
         }
-        });
-      }
+      });
+    }
 
-      const apiUrl = `${normalizeEndpoint(endpoint)}/deployments/${deploymentName}/chat/completions?api-version=${apiVersion}`;
+    const apiUrl = `${normalizeEndpoint(endpoint)}/deployments/${deploymentName}/chat/completions?api-version=${apiVersion}`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -68,27 +69,28 @@ export default async function handler(req: any, res: any) {
             content: prompt,
           },
         ],
-        max_completion_tokens: 2000,
+        temperature: 0.3,
+        max_tokens: 2000,
       }),
     });
 
-      if (!response.ok) {
+    if (!response.ok) {
       const errorText = await response.text();
       console.error('Azure OpenAI API error:', response.status, errorText);
-      return res.status(response.status).json({ 
-          error: `Azure OpenAI API error: ${response.status}`,
-          details: errorText,
-          endpoint: apiUrl
+      return res.status(response.status).json({
+        error: `Azure OpenAI API error: ${response.status}`,
+        details: errorText,
+        endpoint: apiUrl
       });
     }
 
     const data = await response.json();
     const content = data.choices[0]?.message?.content || "I apologize, but I could not generate a response at this time.";
-    
+
     return res.status(200).json({ content });
   } catch (error) {
     console.error("Error in chat API:", error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: "An error occurred while processing your request.",
       details: error instanceof Error ? error.message : 'Unknown error'
     });
